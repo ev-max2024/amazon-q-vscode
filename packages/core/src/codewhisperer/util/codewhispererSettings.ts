@@ -9,13 +9,6 @@ const description = {
     showCodeWithReferences: Boolean,
     importRecommendationForInlineCodeSuggestions: Boolean, // eslint-disable-line id-length
     shareContentWithAWS: Boolean,
-    workspaceIndex: Boolean,
-    workspaceIndexWorkerThreads: Number,
-    workspaceIndexUseGPU: Boolean,
-    workspaceIndexMaxSize: Number,
-    workspaceIndexMaxFileSize: Number,
-    workspaceIndexCacheDirPath: String,
-    workspaceIndexIgnoreFilePatterns: ArrayConstructor(String),
     ignoredSecurityIssues: ArrayConstructor(String),
 }
 
@@ -38,41 +31,6 @@ export class CodeWhispererSettings extends fromExtensionManifest('amazonQ', desc
         const value = this.get('shareContentWithAWS', true)
         return !value
     }
-    public isLocalIndexEnabled(): boolean {
-        return this.get('workspaceIndex', false)
-    }
-
-    public async enableLocalIndex() {
-        await this.update('workspaceIndex', true)
-    }
-
-    public isLocalIndexGPUEnabled(): boolean {
-        return this.get('workspaceIndexUseGPU', false)
-    }
-
-    public getIndexWorkerThreads(): number {
-        // minimal 0 threads
-        return Math.max(this.get('workspaceIndexWorkerThreads', 0), 0)
-    }
-
-    public getMaxIndexSize(): number {
-        // minimal 1MB
-        return Math.max(this.get('workspaceIndexMaxSize', 2048), 1)
-    }
-
-    public getMaxIndexFileSize(): number {
-        // minimal 1MB
-        return Math.max(this.get('workspaceIndexMaxFileSize', 10), 1)
-    }
-
-    public getIndexCacheDirPath(): string {
-        return this.get('workspaceIndexCacheDirPath', '')
-    }
-
-    public getIndexIgnoreFilePatterns(): string[] {
-        return this.get('workspaceIndexIgnoreFilePatterns', [])
-    }
-
     public getIgnoredSecurityIssues(): string[] {
         return this.get('ignoredSecurityIssues', [])
     }

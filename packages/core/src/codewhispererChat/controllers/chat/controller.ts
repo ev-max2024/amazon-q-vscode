@@ -59,7 +59,6 @@ import { triggerPayloadToChatRequest } from './chatRequest/converter'
 import { AuthUtil } from '../../../codewhisperer/util/authUtil'
 import { openUrl } from '../../../shared/utilities/vsCodeUtils'
 import { randomUUID } from '../../../shared/crypto'
-import { CodeWhispererSettings } from '../../../codewhisperer/util/codewhispererSettings'
 import { getSelectedCustomization } from '../../../codewhisperer/util/customizationUtil'
 import { getHttpStatusCode, AwsClientResponseError } from '../../../shared/errors'
 import { uiEventRecorder } from '../../../amazonq/util/eventRecorder'
@@ -1043,7 +1042,7 @@ export class ChatController {
         )
         if (triggerPayload.useRelevantDocuments) {
             triggerPayload.message = triggerPayload.message.replace(/@workspace/, '')
-            if (CodeWhispererSettings.instance.isLocalIndexEnabled()) {
+            if (false) {
             } else {
                 this.messenger.sendOpenSettingsMessage(triggerID, tabID)
                 return
